@@ -7,10 +7,16 @@ import { ProfessionalModule } from './professional/professional.module';
 import { ProfessionModule } from './profession/profession.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
-const uri = "mongodb+srv://aquiles:aquiles123@aquiles.jlxuk.mongodb.net/aquilesdb";
+const uri = `mongodb://${process.env.USER_MONGODB}:${process.env.PASS_MONGODB}@${process.env.CLUSTER_MONGODB}/${process.env.DATA_BASE_MONGODB}?retryWrites=true&w=majority`;
 
 @Module({
-  imports: [ProfessionModule, ProfessionalModule, CityModule, MessageModule, MongooseModule.forRoot(uri)],
+  imports: [
+    ProfessionModule, 
+    ProfessionalModule, 
+    CityModule, 
+    MessageModule, 
+    MongooseModule.forRoot(uri)
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
