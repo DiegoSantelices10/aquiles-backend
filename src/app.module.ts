@@ -7,25 +7,10 @@ import { ProfessionalModule } from './professional/professional.module';
 import { ProfessionModule } from './profession/profession.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
-const uri = "mongodb+srv://aquiles:aquiles123@aquiles.jlxuk.mongodb.net/aquilesdb?directConnection=true";
+const uri = "mongodb+srv://aquiles:aquiles123@aquiles.jlxuk.mongodb.net/aquilesdb?authSource=admin&directConnection=true";
 
 @Module({
-  imports: [ProfessionModule, ProfessionalModule, CityModule, MessageModule, MongooseModule.forRoot(uri, 
-    {
-      connectionFactory: (connection) => {
-        connection.on('connected', () => {
-          console.log('Successfully connected to MongoDB');
-        });
-        connection.on('error', (err) => {
-          console.error('MongoDB connection error:', err);
-        });
-        connection.on('disconnected', () => {
-          console.warn('MongoDB disconnected');
-        });
-        return connection;
-      },
-    },
-  )],
+  imports: [ProfessionModule, ProfessionalModule, CityModule, MessageModule, MongooseModule.forRoot(uri)],
   controllers: [AppController],
   providers: [AppService],
 })
