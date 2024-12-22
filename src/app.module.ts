@@ -7,7 +7,7 @@ import { ProfessionalModule } from './professional/professional.module';
 import { ProfessionModule } from './profession/profession.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
-const uri = "mongodb+srv://aquiles:aquiles123@aquiles.jlxuk.mongodb.net/aquilesdb?authSource=admin&directConnection=true";
+const uri = "mongodb+srv://aquiles:aquiles123@aquiles.jlxuk.mongodb.net/aquilesdb";
 
 @Module({
   imports: [ProfessionModule, ProfessionalModule, CityModule, MessageModule, MongooseModule.forRoot(uri)],
