@@ -3,16 +3,12 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 class Image {
     @Prop()
     url: string;
-  
-    @Prop()
-    altText?: string;
-  }
-  
-  class City {
-    @Prop()
-    name: string;
-  }
 
+    @Prop()
+    fileName: string
+  
+  }
+  
 
 @Schema()
 export class Professional {
@@ -31,8 +27,8 @@ export class Professional {
   @Prop()
   dni: string
 
-  @Prop({ type: [City], default: [] })
-  cities: City[];
+  @Prop()
+  cities: string[];
 
   @Prop()
   description: string
