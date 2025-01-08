@@ -31,4 +31,16 @@ constructor(@InjectModel(Professional.name) private professionalModel: Model<Pro
     async findOne(id: string) {
         return this.professionalModel.findById(id).exec();
       }
+    
+    async findByProfession(profession: string): Promise<Professional[]> {
+        return this.professionalModel.find({ profession }).exec();
+    }
+
+    async findByCities(cities: string): Promise<Professional[]> {
+      return this.professionalModel.find({ cities }).exec();
+    }
+
+    async findByProfessionAndCities(profession: string, cities: string): Promise<Professional[]> {
+      return this.professionalModel.find({ profession, cities }).exec();
+    }
 }

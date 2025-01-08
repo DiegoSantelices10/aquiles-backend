@@ -6,9 +6,18 @@ export class ProfessionalController {
     constructor(private readonly professionalService: ProfessionalService) { }
     
     @Get()
-     getProfessionals() {
-         return this.professionalService.getProfessionals();
-     }
+    getProfessionals(@Query('profession') profession?: string, @Query('cities') cities?: string) {
+        if (profession && cities) {
+            return this.professionalService.findByProfessionAndCities(profession, cities);
+        } 
+        if (profession) {
+            return this.professionalService.findByProfession(profession);
+        }
+        if (cities) {
+            return this.professionalService.findByCities(cities);
+        }
+        return this.professionalService.getProfessionals();
+    }
 
      @Get(':id')
      getProfessionalById(@Param('id') id: string) {
