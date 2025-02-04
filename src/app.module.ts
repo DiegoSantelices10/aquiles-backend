@@ -6,16 +6,21 @@ import { CityModule } from './city/city.module';
 import { ProfessionalModule } from './professional/professional.module';
 import { ProfessionModule } from './profession/profession.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from "./user/user.module";
+import { AuthModule } from "./auth/auth.module";
+import { ConfigModule } from "@nestjs/config";
 
-const uri = "mongodb+srv://aquiles:aquiles123@aquiles.jlxuk.mongodb.net/aquilesdb";
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGODB_URI), 
+    UserModule,
+    AuthModule,
     ProfessionModule, 
     ProfessionalModule, 
     CityModule, 
     MessageModule, 
-    MongooseModule.forRoot(uri)
   ],
   controllers: [AppController],
   providers: [AppService],
