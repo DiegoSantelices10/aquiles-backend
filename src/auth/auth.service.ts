@@ -30,13 +30,21 @@ export class AuthService {
       };
     }
 
-      async register(user: Promise<User>) {
-        const existingUser = await this.userService.findOneByEmail((await user).email);
-        
-        if (existingUser) {
-          throw new ConflictException('Email already in use');
-        }
-        return this.userService.create(user);
-        
+    async register(userPromise: any) {
+      const user = await userPromise; // Asegurar que user se resuelve correctamente
+    
+      // Buscar si ya existe el usuario
+      const existingUser = await this.userService.findOneByEmail(user.email);
+    
+      if (existingUser) {
+        throw new ConflictException({
+          message: 'El correo ya está registrado',
+          error: 'Conflict',
+          statusCode: 409,
+        });
       }
+    
+      return this.userService.create(user);
+    }
+    
 }
