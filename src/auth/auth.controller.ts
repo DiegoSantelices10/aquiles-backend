@@ -10,7 +10,7 @@ export class AuthController {
   @Post('register')
   async register(@Body('name') name: string, @Body('email') email: string, @Body('password') password: string) {
     const newUser: User = { name, email, password };
-    return this.authService.register(Promise.resolve(newUser));
+    return this.authService.register(newUser);
   }
 
   @Post('login')
