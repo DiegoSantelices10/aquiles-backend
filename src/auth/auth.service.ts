@@ -31,21 +31,27 @@ export class AuthService {
     }
 
     async register(userPromise: any) {
-      const user = await userPromise; // Asegurar que user se resuelve correctamente
+      const user = await userPromise;
     
       // Buscar si ya existe el usuario
       const existingUser = await this.userService.findOneByEmail(user.email);
     
       if (existingUser) {
-        throw new ConflictException({
+        return {
+          success: false,
           message: 'El correo ya está registrado',
-          error: 'Conflict',
-          statusCode: 409,
-        });
+        };
       }
+    
       console.log('paso');
-      
-      return this.userService.create(user);
+      const newUser = await this.userService.create(user);
+    
+      return {
+        success: true,
+        message: 'Usuario registrado correctamente',
+        data: newUser,
+      };
     }
+    
     
 }
