@@ -43,7 +43,8 @@ export class AuthService {
           statusCode: 409,
         });
       }
-    
+      console.log('paso');
+      
       return this.userService.create(user);
     }
     
