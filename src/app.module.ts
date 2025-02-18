@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { MessageModule } from './message/message.module';
+import { ProfessionalApplicationModule } from './professionalApplication/professionalApplication.module';
 import { CityModule } from './city/city.module';
 import { ProfessionalModule } from './professional/professional.module';
 import { ProfessionModule } from './profession/profession.module';
@@ -20,7 +20,7 @@ import { ConfigModule } from "@nestjs/config";
     ProfessionModule, 
     ProfessionalModule, 
     CityModule, 
-    MessageModule, 
+    ProfessionalApplicationModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,5 @@
 
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
@@ -26,6 +26,11 @@ export class AuthService {
   
       const payload = { sub: userFind?._id, email: userFind.email };
       return {
+        success: true,
+        id: userFind._id,
+        message: 'Inicio de sesión exitoso',
+        email: userFind.email,
+        name: userFind.name,
         access_token: this.jwtService.sign(payload),
       };
     }
@@ -33,7 +38,6 @@ export class AuthService {
     async register(userPromise: any) {
       const user = await userPromise;
     
-      // Buscar si ya existe el usuario
       const existingUser = await this.userService.findOneByEmail(user.email);
     
       if (existingUser) {
@@ -42,14 +46,13 @@ export class AuthService {
           message: 'El correo ya está registrado',
         };
       }
-    
-      console.log('paso');
       const newUser = await this.userService.create(user);
     
       return {
         success: true,
         message: 'Usuario registrado correctamente',
-        data: newUser,
+        name: newUser.name,
+        email: newUser.email
       };
     }
     
