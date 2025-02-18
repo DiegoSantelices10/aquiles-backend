@@ -34,6 +34,14 @@ async function bootstrap() {
     },
   });
 
+  // Middleware global para evitar caché en todas las respuestas
+  app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+  });
+
   await app.listen(port);
   console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
 }
