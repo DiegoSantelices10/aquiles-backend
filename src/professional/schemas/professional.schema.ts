@@ -10,7 +10,7 @@ class Image {
   }
   
 
-@Schema()
+@Schema({ timestamps: true })
 export class Professional {
   @Prop()
   name: string;
@@ -20,6 +20,15 @@ export class Professional {
 
   @Prop()
   email: string
+  
+  @Prop()
+  password: string
+
+  @Prop()
+  resetPasswordToken?: string; // Opcional, para restablecer la contraseña
+
+  @Prop()
+  resetPasswordExpires?: Date; // Fecha de expiración del token
 
   @Prop()
   telephone: string

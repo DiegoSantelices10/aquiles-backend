@@ -3,7 +3,6 @@ import { ConflictException, HttpException, HttpStatus, Injectable, UnauthorizedE
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
-import { User } from 'src/user/schemas/user.schema';
 import { Auth } from './schemas/auth.schema';
 
 @Injectable()
@@ -56,5 +55,7 @@ export class AuthService {
       };
     }
     
+
+ 
     
 }
