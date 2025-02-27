@@ -1,30 +1,26 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
 
-class Message {
-  @Prop({ required: true })
-  senderId: Types.ObjectId;
 
-  @Prop({ required: true })
-  text: string;
-
-  @Prop({ default: Date.now })
-  timestamp: Date;
-}
 
 @Schema({ timestamps: true })
-export class Consultation extends Document {
+export class Consultation {
   @Prop({ required: true })
-  clientId: Types.ObjectId;
+  name: string;
+
+  @Prop()
+  professionalName: string;
 
   @Prop({ required: true })
-  professionalId: Types.ObjectId;
+  message: string;
 
-  @Prop({ default: false })
-  isResolved: boolean;
+  @Prop({ required: true })
+  telephone: string
 
-  @Prop({ type: [Message], default: [] })
-  messages: Message[];
+  @Prop({ required: true })
+  profession: string
+
+  createdAt?: Date;
+
 }
 
 export const ConsultationSchema = SchemaFactory.createForClass(Consultation);

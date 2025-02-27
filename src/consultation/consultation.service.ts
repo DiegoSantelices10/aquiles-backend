@@ -1,47 +1,34 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Consultation } from './schemas/consultation.schema';
 
 @Injectable()
 export class ConsultationService {
-  constructor(
-    @InjectModel(Consultation.name) private consultationModel: Model<Consultation>,
-  ) {}
+    constructor(@InjectModel(Consultation.name) private consultationModel: Model<Consultation>) {}
 
-  // Crear una consulta
-  async create(createDto: any): Promise<Consultation> {
-    const consultation = new this.consultationModel(createDto);
-    return consultation.save();
-  }
+    async getMessages(): Promise<Consultation[]> {
+        return await this.consultationModel.find().exec();
+    }
 
-  // Obtener una consulta por ID
-  async findByUserId(id: string): Promise<Consultation> {
-    const consultation = await this.consultationModel
-      .findOne({
-        $or: [
-          { clientId: id },
-          { professionalId: id },
-        ],
+    async create(message: Consultation) {
+        const createdMessage = new this.consultationModel(message);
+        return createdMessage.save();
+    }
+
+    async delete(id: string) {
+        return this.consultationModel.findByIdAndDelete(id).exec();
+    }
+
+    async update(id: string, message: any) {
+        return this.consultationModel
+      .findByIdAndUpdate(id, message, {
+        new: true,
       })
       .exec();
-  
-    if (!consultation) {
-      throw new NotFoundException('Consulta no encontrada');
     }
-  
-    return consultation;
-  }
-  // Enviar un mensaje dentro de la consulta
-  async addMessage(consultationId: string, senderId: string, text: string): Promise<Consultation> {
-    return this.consultationModel.findByIdAndUpdate(
-      consultationId,
-      { $push: { 
-        messages: { 
-          senderId, text, 
-          timestamp: new Date().toString() 
-        }}},
-      { new: true },
-    ).exec();
-  }
+
+    async findOne(id: string) {
+        return this.consultationModel.findById(id).exec();
+      }
 }

@@ -1,27 +1,33 @@
-import { Controller, Post, Body, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ConsultationService } from './consultation.service';
-import { Consultation } from './schemas/consultation.schema';
 
 @Controller('consultation')
 export class ConsultationController {
-  constructor(private readonly consultationService: ConsultationService) {}
+    constructor(private readonly messageService: ConsultationService) { }
 
-  @Post()
-  async create(@Body() createDto: any): Promise<Consultation> {
-    return this.consultationService.create(createDto);
-  }
+ 
+     @Get()
+     getMessages() {
+         return this.messageService.getMessages();
+     }
 
-  @Get(':id')
-  async findByUserId(@Param('id') id: string): Promise<Consultation> {
-    return this.consultationService.findByUserId(id);
-  }
-
-  @Put(':consultationId/messages')
-  async addMessage(
-    @Param('consultationId') consultationId: string,
-    @Body('senderId') senderId: string,
-    @Body('text') text: string,
-  ): Promise<Consultation> {
-    return this.consultationService.addMessage(consultationId, senderId, text);
-  }
+     @Get(':id')
+     getMessageById(@Param('id') id: string) {
+         return this.messageService.findOne(id);
+     }
+ 
+     @Post()
+     async create(@Body() createMessage: any) {
+         return this.messageService.create(createMessage);
+     }
+ 
+     @Delete(':id')
+     delete(@Param('id') id: string) {
+         return this.messageService.delete(id);
+     }
+ 
+     @Put(':id')
+     update(@Param('id') id: string, @Body() updateMessage: any) {
+         return this.messageService.update(id, updateMessage);
+     }
 }
