@@ -34,11 +34,8 @@ export class Professional {
   @Prop()
   description: string
 
-  @Prop()
-  imageUser: {
-    url: string;
-    public_id: string
-  }
+  @Prop({ type: Image })
+  imageUser: Image
 
   @Prop({ type: [Image], default: [] })
   image: Image[];
