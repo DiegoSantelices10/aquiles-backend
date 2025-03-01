@@ -48,23 +48,8 @@ async loginProfessional(userPromise: Promise<any>) {
       const professional = new this.professionalModel(professionalData);
       await professional.save();
     
-      const resetToken = this.generateResetToken(professional._id.toString());
-    
-      return { professional, resetToken };
+      return { professional };
     }
-
-    async updatePassword(id: string, newPassword: string): Promise<Professional | null> {
-      
-      const professional = await this.professionalModel.findById(id);
-      
-      if (!professional) return null;
-    
-      professional.password = await bcrypt.hash(newPassword, 10);
-      return professional.save();
-    }
-    
-    
-    
 
     async delete(id: string) {
         return this.professionalModel.findByIdAndDelete(id).exec();
@@ -94,19 +79,6 @@ async loginProfessional(userPromise: Promise<any>) {
       return this.professionalModel.find({ profession, cities }).exec();
     }
 
-    verifyResetToken(token: string) {
-      try {
-        return jwt.verify(token, this.configService.get<string>('JWT_SECRET')) as { id: string };
-      } catch (error) {
-        return null;
-      }
-    }
   
-    private generateResetToken(professionalId: string) {
-      return jwt.sign(
-        { id: professionalId },
-        this.configService.get<string>('JWT_SECRET'),
-        { expiresIn: '24h' },
-      );
-    }
+
 }
