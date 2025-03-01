@@ -1,18 +1,11 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Professional } from './schemas/professional.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ProfessionalService {
-constructor(@InjectModel(Professional.name) private professionalModel: Model<Professional>,
-    private configService: ConfigService,
-    private jwtService: JwtService,
-
+constructor(@InjectModel(Professional.name) private professionalModel: Model<Professional>
 ) {}
 
     async getProfessionals(): Promise<Professional[]> {
