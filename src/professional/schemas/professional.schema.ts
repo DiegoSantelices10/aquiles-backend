@@ -6,7 +6,10 @@ class Image {
 
     @Prop()
     public_id: string
-  
+
+    @Prop()
+    fileName: string
+
   }
   
 
