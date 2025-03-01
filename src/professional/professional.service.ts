@@ -15,31 +15,6 @@ constructor(@InjectModel(Professional.name) private professionalModel: Model<Pro
 
 ) {}
 
-async loginProfessional(userPromise: Promise<any>) {
-  const user = await userPromise;
-  
-  const userFind: any = await this.professionalModel.findOne({ email: user.email }).exec();
-    
-  if (!userFind) {
-    throw new UnauthorizedException('El email o contraseña son incorrectos');
-  }
-
-  const isPasswordValid = await bcrypt.compare(user.password, userFind.password);
-  if (!isPasswordValid) {
-    throw new UnauthorizedException('El email o contraseña son incorrectos');
-  }
-
-  const payload = { sub: userFind?._id, email: userFind.email };
-  return {
-    success: true,
-    id: userFind._id,
-    message: 'Inicio de sesión exitoso',
-    email: userFind.email,
-    name: userFind.name,
-    access_token: this.jwtService.sign(payload),
-  };
-}
-
     async getProfessionals(): Promise<Professional[]> {
         return await this.professionalModel.find().exec();
     }
