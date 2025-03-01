@@ -5,7 +5,7 @@ class Image {
     url: string;
 
     @Prop()
-    fileName: string
+    public_id: string
   
   }
   
@@ -21,14 +21,6 @@ export class Professional {
   @Prop()
   email: string
   
-  @Prop()
-  password: string
-
-  @Prop()
-  resetPasswordToken?: string; // Opcional, para restablecer la contraseña
-
-  @Prop()
-  resetPasswordExpires?: Date; // Fecha de expiración del token
 
   @Prop()
   telephone: string
@@ -37,10 +29,16 @@ export class Professional {
   dni: string
 
   @Prop()
-  cities: string[];
+  city: string;
 
   @Prop()
   description: string
+
+  @Prop()
+  imageUser: {
+    url: string;
+    public_id: string
+  }
 
   @Prop({ type: [Image], default: [] })
   image: Image[];
