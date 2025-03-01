@@ -38,7 +38,7 @@ export class Professional {
   imageUser: Image
 
   @Prop({ type: [Image], default: [] })
-  image: Image[];
+  images: Image[];
 }
 
 export const ProfessionalSchema = SchemaFactory.createForClass(Professional);
