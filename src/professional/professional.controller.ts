@@ -29,8 +29,8 @@ export class ProfessionalController {
      }
 
      @Delete(':id/remove-image')
-     async removeImage(@Param('id') userId: string, @Body() removeImageDto: any) {
-       return this.professionalService.removeImage(userId, removeImageDto);
+     async removeImage(@Param('id') userId: string, @Body() public_id: any) {
+       return this.professionalService.removeImage(userId, public_id);
      }
 
 
