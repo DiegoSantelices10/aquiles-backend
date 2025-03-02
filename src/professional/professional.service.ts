@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Professional } from './schemas/professional.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -45,6 +45,20 @@ constructor(@InjectModel(Professional.name) private professionalModel: Model<Pro
 
     async findByProfessionAndCities(profession: string, cities: string): Promise<Professional[]> {
       return this.professionalModel.find({ profession, cities }).exec();
+    }
+
+    async removeImage(userId: string, removeImageDto: any) {
+      const { public_id } = removeImageDto;
+  
+      const user = await this.findOne(userId);
+      if (!user) {
+        throw new NotFoundException('Usuario no encontrado');
+      }
+  
+      user.images = user.images.filter(image => image.public_id !== public_id);
+  
+      await user.save();
+      return user;
     }
 
   

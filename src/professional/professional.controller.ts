@@ -28,9 +28,14 @@ export class ProfessionalController {
          return this.professionalService.findOne(id);
      }
 
+     @Delete(':id/remove-image')
+     async removeImage(@Param('id') userId: string, @Body() removeImageDto: any) {
+       return this.professionalService.removeImage(userId, removeImageDto);
+     }
+
 
      @Post()
-     async createProfessional(@Body() professionalData: Partial<Professional>) {
+    async createProfessional(@Body() professionalData: Partial<Professional>) {
        const { professional } = await this.professionalService.create(professionalData);
        return { message: 'Profesional creado exitosamente',  professional };
      }
