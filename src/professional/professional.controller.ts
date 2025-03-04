@@ -18,7 +18,7 @@ export class ProfessionalController {
             return this.professionalService.findByProfession(profession);
         }
         if (city) {
-            return this.professionalService.findByCities(city);
+            return this.professionalService.findByCity(city);
         }
         return this.professionalService.getProfessionals();
     }

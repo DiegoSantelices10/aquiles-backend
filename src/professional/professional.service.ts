@@ -39,7 +39,7 @@ constructor(@InjectModel(Professional.name) private professionalModel: Model<Pro
         return this.professionalModel.find({ profession }).exec();
     }
 
-    async findByCities(city: string): Promise<Professional[]> {
+    async findByCity(city: string): Promise<Professional[]> {
       return this.professionalModel.find({ city }).exec();
     }
 
