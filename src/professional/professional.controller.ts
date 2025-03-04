@@ -10,15 +10,15 @@ export class ProfessionalController {
     ) { }
     
     @Get()
-    getProfessionals(@Query('profession') profession?: string, @Query('cities') cities?: string) {
-        if (profession && cities) {
-            return this.professionalService.findByProfessionAndCities(profession, cities);
+    getProfessionals(@Query('profession') profession?: string, @Query('city') city?: string) {
+        if (profession && city) {
+            return this.professionalService.findByProfessionAndCities(profession, city);
         } 
         if (profession) {
             return this.professionalService.findByProfession(profession);
         }
-        if (cities) {
-            return this.professionalService.findByCities(cities);
+        if (city) {
+            return this.professionalService.findByCities(city);
         }
         return this.professionalService.getProfessionals();
     }

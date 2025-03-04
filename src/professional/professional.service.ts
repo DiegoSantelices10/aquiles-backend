@@ -39,12 +39,12 @@ constructor(@InjectModel(Professional.name) private professionalModel: Model<Pro
         return this.professionalModel.find({ profession }).exec();
     }
 
-    async findByCities(cities: string): Promise<Professional[]> {
-      return this.professionalModel.find({ cities }).exec();
+    async findByCities(city: string): Promise<Professional[]> {
+      return this.professionalModel.find({ city }).exec();
     }
 
-    async findByProfessionAndCities(profession: string, cities: string): Promise<Professional[]> {
-      return this.professionalModel.find({ profession, cities }).exec();
+    async findByProfessionAndCities(profession: string, city: string): Promise<Professional[]> {
+      return this.professionalModel.find({ profession, city }).exec();
     }
 
     async removeImage(userId: string, removeImageDto: any) {
