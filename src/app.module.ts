@@ -11,7 +11,6 @@ import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "@nestjs/config";
 import { ConsultationModule } from "./consultation/consultation.module";
 
-
 @Module({
   imports: [
     ConfigModule.forRoot(),
