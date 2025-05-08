@@ -1,7 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
 
-
 @Schema({ timestamps: true })
 export class ProfessionalApplication {
   @Prop()
@@ -11,10 +10,13 @@ export class ProfessionalApplication {
   message: string;
 
   @Prop()
-  telephone: string
+  telephone: string;
 
   @Prop()
-  profession: string
+  profession: string;
+
+  @Prop()
+  acceptTerms: boolean;
 
   createdAt?: Date;
 
