@@ -42,6 +42,18 @@ export class Professional {
 
   @Prop({ type: [Image], default: [] })
   images: Image[];
+
+  @Prop()
+  acceptTerms: boolean;
+
+  @Prop()
+  acceptPrivacyPolicy: boolean;
+
+  @Prop()
+  registrationNumber: string;
+
+  @Prop()
+  reasonSocial: string;
 }
 
 export const ProfessionalSchema = SchemaFactory.createForClass(Professional);
