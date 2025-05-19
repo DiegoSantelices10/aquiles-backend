@@ -29,7 +29,7 @@ export class Professional {
   telephone: string
 
   @Prop()
-  dni: string
+  cuit: string
 
   @Prop()
   city: string;
@@ -54,6 +54,14 @@ export class Professional {
 
   @Prop()
   reasonSocial: string;
+
+  @Prop()
+  secure: string;
+
+  @Prop()
+  monotributo: string;
+
+
 }
 
 export const ProfessionalSchema = SchemaFactory.createForClass(Professional);
