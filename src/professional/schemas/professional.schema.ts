@@ -56,11 +56,7 @@ export class Professional {
   reasonSocial: string;
 
   @Prop()
-  secure: string;
-
-  @Prop()
-  monotributo: string;
-
+  available: boolean;
 
 }
 
