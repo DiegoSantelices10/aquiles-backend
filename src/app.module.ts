@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "@nestjs/config";
+import { MessageClientModule } from "./messageClient/messageClient.module";
 import { ConsultationModule } from "./consultation/consultation.module";
 
 @Module({
@@ -19,6 +20,7 @@ import { ConsultationModule } from "./consultation/consultation.module";
     AuthModule,
     ProfessionModule, 
     ProfessionalModule, 
+    MessageClientModule,
     ConsultationModule,
     CityModule, 
     ProfessionalApplicationModule, 
